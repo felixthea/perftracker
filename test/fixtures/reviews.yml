@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result: MyString
+  start: 2024-09-05 21:39:23
+  end: 2024-09-05 21:39:23
+  type: 
+
+two:
+  result: MyString
+  start: 2024-09-05 21:39:23
+  end: 2024-09-05 21:39:23
+  type: 

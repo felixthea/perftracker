@@ -1,0 +1,21 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles
+/log/*
+/tmp/*
+
+# Ignore compiled output
+/public/assets
+/public/packs
+/node_modules
+
+# Ignore Spring files
+/spring/*
+
+# Ignore byebug history
+.byebug_history
+
+# Ignore master key
+/config/master.key
+
