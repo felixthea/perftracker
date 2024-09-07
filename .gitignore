@@ -19,3 +19,4 @@
 # Ignore master key
 /config/master.key
 
+.env
