@@ -58,3 +58,5 @@ group :test do
 end
 
 gem 'pg', group: :production
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
