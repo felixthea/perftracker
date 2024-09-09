@@ -4794,3 +4794,45 @@ Processing by Rails::PwaController#manifest as JSON
 Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
 
 
+Started GET "/" for ::1 at 2024-09-08 22:14:08 -0400
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:3
+  Rendered home/index.html.erb within layouts/application (Duration: 11.5ms | GC: 4.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.6ms | GC: 6.3ms)
+Completed 200 OK in 26ms (Views: 24.4ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 6.3ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-08 22:14:08 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 1.1ms | GC: 0.0ms)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/expectations" for ::1 at 2024-09-08 22:14:12 -0400
+  
+ActionController::RoutingError (uninitialized constant ExpectationsController):
+
+Causes:
+ActionDispatch::MissingController (uninitialized constant ExpectationsController)
+NameError (uninitialized constant ExpectationsController)
+  
+Started GET "/expectations" for ::1 at 2024-09-08 22:14:39 -0400
+Processing by ExpectationsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering expectations/index.html.erb within layouts/application
+  Rendered expectations/index.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | GC: 0.7ms)
+Completed 200 OK in 13ms (Views: 11.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-08 22:14:39 -0400
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.2ms | GC: 0.0ms)
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.5ms)
+
+
