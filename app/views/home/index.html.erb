@@ -2,7 +2,9 @@
 <p>Find me in app/views/home/index.html.erb</p>
 <% if user_signed_in? %>
   <p>Your email: <%= current_user.email %></p>
+  <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to log out?' } %>
 <% else %>
-    <p>Welcome Guest!</p>
+  <p>Welcome Guest!</p>
+  <%= link_to 'Login', new_user_session_path, method: :get %>
 <% end %>
 
