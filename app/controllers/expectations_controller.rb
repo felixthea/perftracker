@@ -5,11 +5,7 @@ class ExpectationsController < ApplicationController
   end
 
   def create
-    puts "params"
-    puts params
-    @expectation = Expectation.new(
-      text: params["expectation"]["text"]
-    )
+    @expectation = current_user.expectations.new(expectation_params)
 
     if @expectation.save
       flash[:notice] = "Expectation was successfully created."
@@ -20,5 +16,11 @@ class ExpectationsController < ApplicationController
       @expectations = Expectation.all
       render :index
     end
+  end
+
+  private
+
+  def expectation_params
+    params.require(:expectation).permit(:text)
   end
 end
