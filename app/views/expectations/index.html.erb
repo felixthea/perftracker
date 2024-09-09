@@ -1,1 +1,26 @@
-<h1>Expectations#index</h1
+<h1>Expectations#index</h1>
+<!-- Display existing expectations -->
+<ul>
+  <% @expectations.each do |expectation| %>
+    <li><%= expectation.text %></li>
+  <% end %>
+</ul>
+
+<!-- Form to create a new expectation -->
+<h2>Add a New Expectation</h2>
+
+<%= form_with(model: @expectation, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :text %>  
+    <%= form.text_field :text %>  
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Expectation" %>
+  </div>
+<% end %>
+
+<!-- Display flash messages -->
+<% flash.each do |key, message| %>
+  <div class="alert alert-<%= key %>"><%= message %></div>
+<% end %>
