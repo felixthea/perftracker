@@ -1,11 +1,14 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+
+development:
+  <<: *default
   database: database_name_development
-  pool: 5
-  host: localhost
-  username: admin 
-  password: qt95kbfg
 
 test:
   adapter: postgresql
@@ -19,4 +22,5 @@ staging:
   url: <%= ENV['DATABASE_URL'] %>
 
 production:
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %> 
