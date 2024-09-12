@@ -1,12 +1,29 @@
 class ReviewGenerator
   OPENAI_URL = 'https://api.openai.com/v1/chat/completions'
 
-  def initialize(user_id:, start_time:, end_time:, expectation_id:, review_type:)
+  def initialize(user_id:, start_time:, end_time:, expectation_id:, review_type:, initial_prompt:)
     @user_id = user_id
     @start_time = start_time
     @end_time = end_time
     @expectation_id = expectation_id
     @review_type = review_type
+
+    default_prompt = <<~HEREDOC
+      Hi, I have to write a self-review and would like you to create
+      it for me by taking these list of accomplishments and write a review
+      that demonstrates how I meet or exceed the job expectation. Start directly 
+      with the feedback, without any introductory phrases or acknowledgements 
+      of this request.\n
+    HEREDOC
+
+    weekly_prompt = <<~HEREDOC
+      Hi, I would like to create a recap of my week with these accomplishments
+      and how they helped me meet or exceed my expectations. Write this in a
+      way where you are talking directly to me to give me mostly positive feedback
+      and some constructive feedback. Start directly with the feedback, without
+      any introductory phrases or acknowledgements of this request.\n
+    HEREDOC
+    @initial_prompt = initial_prompt || default_prompt
 
     @user = User.find(@user_id)
   end
@@ -28,6 +45,17 @@ class ReviewGenerator
   end
 
   def generate_prompt(accomplishments:, expectation:)
+    prompt_str = @initial_prompt.dup
+    accomplishments_str = "Here are the accomplishments:\n"
+    accomplishments.each.with_index(1) do |accomplishment, index|
+      accomplishments_str << "#{index}. #{accomplishment.text}\n"
+    end
+
+    expectation_str = "\nAnd here is the job expectation:\n#{expectation.text}"
+
+    prompt_str << accomplishments_str 
+    prompt_str << expectation_str
+    prompt_str
   end
 
   def call_llm(prompt:)
