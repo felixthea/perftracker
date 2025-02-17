@@ -1,7 +1,9 @@
-user1 = User.find_or_create_by(email: "johnsmith@gmail.com") do |u|
-  u.password = "test123",
+user1 = User.find_or_create_by!(email: "johnsmith@gmail.com") do |u|
+  u.password = "test123"
   u.password_confirmation = "test123"
 end
+
+puts "user1=#{user1.id}"
 
 SENIOR_SWE_EXPECTATION = <<~HEREDOC
   A Senior Software Engineer is expected to design, develop, and maintain complex#{' '}
@@ -45,7 +47,7 @@ accomplishment_texts.each do |at|
   # text_found = Accomplishment.find_by(text: at)
   # puts text_found
   # next if text_found
-  Accomplishment.create(
+  Accomplishment.create!(
     user_id: user1.id,
     text: at
   )
