@@ -34,7 +34,18 @@ class ReviewGenerator
 
   def generate_report
     accomplishments = Accomplishment.where(user_id: @user.id, created_at: @start_time..@end_time)
+
+    if accomplishments.empty?
+      puts "No accomplishments for user=#{@user.id} in range #{@start_time}-#{@end_time}"
+      return
+    end
+
     expectation = Expectation.find(@expectation_id)
+
+    if expectation.nil?
+      puts "No expectation for user=#{@user.id}"
+      return
+    end
 
     prompt = generate_prompt(accomplishments: accomplishments, expectation: expectation)
     llm_response = call_llm(prompt: prompt)
@@ -85,8 +96,6 @@ class ReviewGenerator
       end: @end_time,
       review_type: @review_type
     )
-    puts "review result=#{review.result}"
-    puts "review id=#{review.id}"
     review
   end
 end
