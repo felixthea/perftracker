@@ -13,6 +13,5 @@ task generate_review_for_all_users: :environment do
     review_type: "WEEKLY"
   )
   results = all_review_generator.call
-  puts "results"
   puts results
 end

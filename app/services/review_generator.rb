@@ -33,7 +33,7 @@ class ReviewGenerator
   end
 
   def generate_report
-    accomplishments = Accomplishment.where(created_at: @start_time..@end_time)
+    accomplishments = Accomplishment.where(user_id: @user.id, created_at: @start_time..@end_time)
     expectation = Expectation.find(@expectation_id)
 
     prompt = generate_prompt(accomplishments: accomplishments, expectation: expectation)
@@ -78,12 +78,15 @@ class ReviewGenerator
   end
 
   def create_review(llm_response:)
-    review = Review.new(
+    review = Review.create!(
+      user: @user,
       result: llm_response,
       start: @start_time,
       end: @end_time,
-      type: @review_time
+      review_type: @review_type
     )
+    puts "review result=#{review.result}"
+    puts "review id=#{review.id}"
     review
   end
 end
