@@ -69,7 +69,7 @@ class ReviewGenerator
       temperature: 1.0
     }
 
-    response = HTTP.headers(headers).post(url, json: body)
+    response = HTTP.headers(headers).post(OPENAI_URL, json: request_body)
     if response.status.success?
       response.parse["choices"][0]["message"]["content"]
     else

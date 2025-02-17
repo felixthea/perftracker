@@ -29,7 +29,7 @@ class AllReviewGenerator
 
     @users.each do |user|
       # In the future we may ask the user to specify which expectation to use
-      most_recent_expectation = Expectaton.order(created_at: :desc).first
+      most_recent_expectation = Expectation.order(created_at: :desc).first
       review_generator = ReviewGenerator.new(
         user_id: user.id,
         start_time: @start_time,
