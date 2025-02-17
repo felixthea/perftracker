@@ -1,5 +1,5 @@
 class ReviewGenerator
-  OPENAI_URL = 'https://api.openai.com/v1/chat/completions'
+  OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 
   def initialize(user_id:, start_time:, end_time:, expectation_id:, review_type:, initial_prompt:)
     @user_id = user_id
@@ -11,8 +11,8 @@ class ReviewGenerator
     default_prompt = <<~HEREDOC
       Hi, I have to write a self-review and would like you to create
       it for me by taking these list of accomplishments and write a review
-      that demonstrates how I meet or exceed the job expectation. Start directly 
-      with the feedback, without any introductory phrases or acknowledgements 
+      that demonstrates how I meet or exceed the job expectation. Start directly#{' '}
+      with the feedback, without any introductory phrases or acknowledgements#{' '}
       of this request.\n
     HEREDOC
 
@@ -23,7 +23,7 @@ class ReviewGenerator
       and some constructive feedback. Start directly with the feedback, without
       any introductory phrases or acknowledgements of this request.\n
     HEREDOC
-    @initial_prompt = initial_prompt || default_prompt
+    @initial_prompt = initial_prompt
 
     @user = User.find(@user_id)
   end
@@ -39,7 +39,7 @@ class ReviewGenerator
     prompt = generate_prompt(accomplishments: accomplishments, expectation: expectation)
     llm_response = call_llm(prompt: prompt)
 
-    # Create a Review 
+    # Create a Review
     review = create_review(llm_response: llm_response)
     review.id
   end
@@ -53,25 +53,25 @@ class ReviewGenerator
 
     expectation_str = "\nAnd here is the job expectation:\n#{expectation.text}"
 
-    prompt_str << accomplishments_str 
+    prompt_str << accomplishments_str
     prompt_str << expectation_str
     prompt_str
   end
 
   def call_llm(prompt:)
     headers = {
-      'Content-Type' => 'application/json',
-      'Authorization' => "Bearer #{ENV['OPENAI_API_KEY']}"
+      "Content-Type" => "application/json",
+      "Authorization" => "Bearer #{ENV['OPENAI_API_KEY']}"
     }
     request_body = {
-      model: 'gpt-4o-mini',
-      messages: [{role: 'user', content: prompt}],
+      model: "gpt-4o-mini",
+      messages: [ { role: "user", content: prompt } ],
       temperature: 1.0
     }
 
     response = HTTP.headers(headers).post(url, json: body)
     if response.status.success?
-      response.parse['choices'][0]['message']['content']
+      response.parse["choices"][0]["message"]["content"]
     else
       puts "Error: #{response.status}"
     end
