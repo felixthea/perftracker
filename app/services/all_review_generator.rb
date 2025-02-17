@@ -27,6 +27,8 @@ class AllReviewGenerator
     # Instantiate review_generator service object
     # Call review_generator service object
 
+    created_reviews = []
+
     @users.each do |user|
       # In the future we may ask the user to specify which expectation to use
       most_recent_expectation = Expectation.where(user_id: user.id).order(created_at: :desc).first
@@ -38,8 +40,15 @@ class AllReviewGenerator
         review_type: @review_type,
         initial_prompt: @initial_prompt
       )
+
       # returns review.id
-      review_generator.call
+      review_id = review_generator.call
+
+      if !review_id.nil?
+        created_reviews << { user_id: user.id, review_id: review_id }
+      end
     end
+
+    puts "created reviews=#{created_reviews}"
   end
 end
