@@ -62,3 +62,4 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem "omniauth-rails_csrf_protection"
 gem 'http'
 gem 'whenever', require: false
+gem "mailgun-ruby", "~> 1.3"

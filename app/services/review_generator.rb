@@ -50,9 +50,7 @@ class ReviewGenerator
     prompt = generate_prompt(accomplishments: accomplishments, expectation: expectation)
     llm_response = call_llm(prompt: prompt)
 
-    # Create a Review
-    review = create_review(llm_response: llm_response)
-    review.id
+    create_review(llm_response: llm_response)
   end
 
   def generate_prompt(accomplishments:, expectation:)
@@ -89,13 +87,12 @@ class ReviewGenerator
   end
 
   def create_review(llm_response:)
-    review = Review.create!(
+    Review.create!(
       user: @user,
       result: llm_response,
       start: @start_time,
       end: @end_time,
       review_type: @review_type
     )
-    review
   end
 end
