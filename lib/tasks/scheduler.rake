@@ -1,7 +1,7 @@
 desc "This task creates weekly reviews for all users"
 task generate_review_for_all_users: :environment do
   puts "generating review for all users"
-  Services::AllReviewGenerator.new(
+  AllReviewGenerator.new(
     start_time: DateTime.now - 7,
     end_time: DateTime.now,
     review_type: "WEEKLY"
