@@ -1,4 +1,4 @@
-user1 = User.find_or_create_by!(email: "johnsmith@gmail.com") do |u|
+user1 = User.find_or_create_by!(email: "felixthea@gmail.com") do |u|
   u.password = "test123"
   u.password_confirmation = "test123"
 end

@@ -1,4 +1,4 @@
-class AllReviewGenerator
+class Services::AllReviewGenerator
   OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 
   def initialize(start_time:, end_time:, review_type:)
