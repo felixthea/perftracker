@@ -34,8 +34,6 @@ class AllReviewGenerator
       review = review_generator.call
 
       if !review.nil?
-        # Send emails of reviews
-        # TODO: this should probably be it's own service
         MailgunService.send_email("felixthea@gmail.com", "Hello!", review.result)
       end
     end
