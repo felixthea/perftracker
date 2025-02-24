@@ -8,6 +8,8 @@ class MailgunController < ApplicationController
     # Log for debugging (optional)
     Rails.logger.info "Received email from #{email_params[:sender]} to #{email_params[:recipient]}"
 
+    ProcessAccomplishmentsEmail.new(params.permit(:sender, :recipient, :subject, :body_plain)).call
+
     # Respond to Mailgun to acknowledge receipt
     render json: { status: "success" }, status: 200
   end
