@@ -16,7 +16,7 @@ class ProcessAccomplishmentsEmail
     User.find_by(email: @sender) # Ensure sender exists as a user
   end
 
-  def create_accomplishment(user:)
+  def create_accomplishment(user)
     accomplishment = Accomplishment.create!(
       user: user,
       text: @email_body.strip, # Save email body as the accomplishment text
