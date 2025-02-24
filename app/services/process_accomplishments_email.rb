@@ -1,5 +1,5 @@
 class ProcessAccomplishmentsEmail
-  def initialize(email_params:)
+  def initialize(email_params)
     @sender = email_params[:sender]
     @email_body = email_params[:body_plain]
   end
