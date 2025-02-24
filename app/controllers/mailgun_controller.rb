@@ -6,7 +6,7 @@ class MailgunController < ApplicationController
     # email_params = params.permit(:recipient, :sender, :subject, "body_plain")
 
     # Log for debugging (optional)
-    Rails.logger.info "Received email from #{email_params[:sender]} to #{email_params[:recipient]}"
+    # Rails.logger.info "Received email from #{email_params[:sender]} to #{email_params[:recipient]}"
 
     ProcessAccomplishmentsEmail.new(params).call
 
