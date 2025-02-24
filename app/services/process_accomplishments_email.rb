@@ -1,8 +1,7 @@
 class ProcessAccomplishmentsEmail
   def initialize(email_params)
     @sender = email_params[:sender]
-    @email_body = email_params[:body_plain]
-    Rails.logger.info "email_params=#{email_params}"
+    @email_body = email_params["body-plain"]
   end
 
   def call
