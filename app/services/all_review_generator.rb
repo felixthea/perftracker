@@ -24,7 +24,7 @@ class AllReviewGenerator
       time_in_user_tz = Time.current.in_time_zone(user.timezone)
 
       # Only send this report if it's Friday at 6pm the user's timezone
-      if time_in_user_tz.hour == SEND_HOUR && time_in_user_tz.wday == 6
+      if time_in_user_tz.hour == SEND_HOUR && time_in_user_tz.wday == 5
         # In the future we may ask the user to specify which expectation to use
         most_recent_expectation = Expectation.where(user_id: user.id).order(created_at: :desc).first
         review_generator = ReviewGenerator.new(

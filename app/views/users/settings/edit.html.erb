@@ -1,0 +1,14 @@
+<h2>Update Settings</h2>
+
+<%= form_with model: @user, url: settings_path, method: :patch do |f| %>
+  <div>
+    <%= f.label :timezone %>
+    <%= f.select :timezone, ActiveSupport::TimeZone.all.map { |tz| [tz.name, tz.name] } %>
+  </div>
+
+   <div>
+    <%= f.submit "Update Settings" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", root_path %>
