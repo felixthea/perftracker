@@ -1,4 +1,8 @@
 <h1>Expectations#index</h1>
+<!-- Display flash messages -->
+<% flash.each do |key, message| %>
+  <div class="alert alert-<%= key %>"><%= message %></div>
+<% end %>
 <!-- Display existing expectations -->
 <ul>
   <% @expectations.each do |expectation| %>
@@ -20,7 +24,3 @@
   </div>
 <% end %>
 
-<!-- Display flash messages -->
-<% flash.each do |key, message| %>
-  <div class="alert alert-<%= key %>"><%= message %></div>
-<% end %>

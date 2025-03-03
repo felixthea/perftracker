@@ -1,0 +1,13 @@
+<h2>Set Your Timezone</h2>
+<p>To personalize your experience, please select your timezone.</p>
+
+<%= form_with model: @user, url: onboarding_path, method: :patch do |f| %>
+  <div>
+    <%= f.label :timezone %>
+    <%= f.select :timezone, ActiveSupport::TimeZone.all.map { |tz| [tz.name, tz.name] }, prompt: "Select your timezone" %>
+  </div>
+
+  <div>
+    <%= f.submit "Save Timezone" %>
+  </div>
+<% end %>

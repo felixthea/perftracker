@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :expectations, only: [ :index, :create ]
   resource :settings, only: [ :edit, :update ], controller: "users/settings"
+  get "/onboarding", to: "users#onboarding", as: :onboarding
+  patch "/onboarding", to: "users#update_timezone"
 
   post "/mailgun/incoming", to: "mailgun#incoming"
 end
