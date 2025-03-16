@@ -63,3 +63,5 @@ gem "omniauth-rails_csrf_protection"
 gem 'http'
 gem 'whenever', require: false
 gem "mailgun-ruby", "~> 1.3"
+
+gem "tailwindcss-rails", "~> 4.2"

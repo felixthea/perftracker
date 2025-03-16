@@ -1,12 +1,19 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<% if user_signed_in? %>
-  <p>Your email: <%= current_user.email %></p>
-  <%= link_to 'Expectations', expectations_path %>
-  <%= link_to 'Settings', '/settings/edit' %>
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to log out?' } %>
-<% else %>
-  <p>Welcome Guest!</p>
-  <%= link_to 'Login', new_user_session_path, method: :get %>
-<% end %>
+<nav class="bg-white shadow-md p-4 flex justify-between items-center">
+  <div class="text-lg font-semibold text-gray-700">
+    <%= link_to "MyApp", root_path, class: "hover:text-blue-500" %>
+  </div>
 
+  <div class="flex space-x-4">
+    <% if user_signed_in? %>
+      <span class="text-gray-600">Welcome, <%= current_user.email %></span>
+
+      <%= link_to "Expectations", expectations_path, class: "px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition" %>
+      
+      <%= link_to "Settings", "/settings/edit", class: "px-4 py-2 bg-gray-500 text-white rounded-lg shadow hover:bg-gray-600 transition" %>
+
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to log out?" }, class: "px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition" %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, method: :get, class: "px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition" %>
+    <% end %>
+  </div>
+</nav>
