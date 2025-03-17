@@ -17,10 +17,19 @@ class ProcessAccomplishmentsEmail
   end
 
   def create_accomplishment(user)
+    body = clean_body(@email_body)
     accomplishment = Accomplishment.create!(
       user: user,
-      text: @email_body.strip, # Save email body as the accomplishment text
+      text: body, # Save email body as the accomplishment text
     )
     Rails.logger.info "Accomplishment saved for #{user.email}, accomplishment: #{accomplishment.id}"
+  end
+
+  private
+  def clean_body(body)
+    body = body.split(/^On .* wrote:$/).first
+    body = body.split(/^Sent from my .*$/).first
+    body.split(/^On .* wrote:$/).first.strip
+    body = body.strip
   end
 end
