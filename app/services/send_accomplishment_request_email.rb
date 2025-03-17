@@ -10,12 +10,12 @@ class SendAccomplishmentRequestEmail
 
   def send_for_all_users
     User.all.each do |user|
-      time_in_user_tz = Time.current.in_time_zone(user.timezone)
+        # time_in_user_tz = Time.current.in_time_zone(user.timezone)
 
-      # Only send if within SEND_HOUR and is during a weekday
-      if time_in_user_tz.hour == SEND_HOUR && (1..5).cover?(time_in_user_tz.wday)
+        # Only send if within SEND_HOUR and is during a weekday
+        # if time_in_user_tz.hour == SEND_HOUR && (1..5).cover?(time_in_user_tz.wday)
         MailgunService.send_email(user.email, "What did you do today?", ACCOMPLISHMENT_REQUEST_EMAIL_BODY)
-      end
+      # end
     end
   end
 end
