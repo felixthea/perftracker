@@ -29,7 +29,6 @@ class ProcessAccomplishmentsEmail
   def clean_body(body)
     body = body.split(/^On .* wrote:$/).first
     body = body.split(/^Sent from my .*$/).first
-    body.split(/^On .* wrote:$/).first.strip
     body = body.strip
   end
 end
