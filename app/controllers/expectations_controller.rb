@@ -1,6 +1,8 @@
 class ExpectationsController < ApplicationController
+  before_action :authenticate_user! # Ensures the user is logged in
+
   def index
-    @expectations = Expectation.all
+    @expectations = Expectation.joins(:user).where(users: { email: current_user.email })
     @expectation = Expectation.new
   end
 
