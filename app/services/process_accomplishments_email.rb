@@ -27,8 +27,17 @@ class ProcessAccomplishmentsEmail
 
   private
   def clean_body(body)
-    body = body.split(/^On .* wrote:$/).first
-    body = body.split(/^Sent from my .*$/).first
-    body = body.strip
+    # Remove reply headers ("On ... wrote:" or variations)
+    body = body.gsub(/On.*wrote:.*/m, "").strip
+    body = body.gsub(/Am.*schreef:.*/m, "").strip
+    body = body.gsub(/El.*escribió:.*/m, "").strip
+
+    # Remove common signatures
+    body = body.gsub(/^--.*/m, "").strip
+
+    # Remove "Sent from my iPhone" type of lines
+    body = body.gsub(/Sent from my .*/, "").strip
+
+    body
   end
 end
