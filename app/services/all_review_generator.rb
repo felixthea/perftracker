@@ -40,7 +40,7 @@ class AllReviewGenerator
         review = review_generator.call
 
         if !review.nil?
-          MailgunService.send_email("felix@easyperf.co", "Your EasyPerf report!", review.result)
+          MailgunService.send_email(user.email, "Your EasyPerf report!", review.result)
         end
       end
     end
