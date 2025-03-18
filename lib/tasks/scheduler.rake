@@ -1,10 +1,11 @@
 desc "This task creates weekly reviews for all users"
-task generate_review_for_all_users: :environment do
+task :generate_review_for_all_users, [ :skip_time_restriction ] => :environment do |task, args|
   puts "generating review for all users"
   AllReviewGenerator.new(
     start_time: DateTime.now - 7,
     end_time: DateTime.now,
-    review_type: "WEEKLY"
+    review_type: "WEEKLY",
+    skip_time_restriction: skip_time_restriction
   ).call
 end
 
