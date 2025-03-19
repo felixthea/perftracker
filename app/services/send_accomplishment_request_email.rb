@@ -1,5 +1,5 @@
 class SendAccomplishmentRequestEmail
-  ACCOMPLISHMENT_REQUEST_EMAIL_BODY = "Hi, please tell me what you did today in the STAR format!"
+  ACCOMPLISHMENT_REQUEST_EMAIL_BODY = "Hi, please reply and tell me what you did today!"
   SEND_HOUR = 16 # 16 represents 4 PM
   def initialize
   end
