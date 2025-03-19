@@ -1,12 +1,13 @@
 class ReviewGenerator
   OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 
-  def initialize(user_id:, start_time:, end_time:, expectation_id:, review_type:, initial_prompt:)
+  def initialize(user_id:, start_time:, end_time:, expectation_id:, review_type:, initial_prompt:, accomplishments:)
     @user_id = user_id
     @start_time = start_time
     @end_time = end_time
     @expectation_id = expectation_id
     @review_type = review_type
+    @accomplishments = accomplishments
 
     default_prompt = <<~HEREDOC
       Hi, I have to write a self-review and would like you to create
@@ -33,13 +34,6 @@ class ReviewGenerator
   end
 
   def generate_report
-    accomplishments = Accomplishment.where(user_id: @user.id, created_at: @start_time..@end_time)
-
-    if accomplishments.empty?
-      puts "No accomplishments for user=#{@user.id} in range #{@start_time}-#{@end_time}"
-      return
-    end
-
     expectation = Expectation.find(@expectation_id)
 
     if expectation.nil?
@@ -47,7 +41,7 @@ class ReviewGenerator
       return
     end
 
-    prompt = generate_prompt(accomplishments: accomplishments, expectation: expectation)
+    prompt = generate_prompt(accomplishments: @accomplishments, expectation: expectation)
     llm_response = call_llm(prompt: prompt)
 
     create_review(llm_response: llm_response)

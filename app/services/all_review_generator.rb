@@ -28,13 +28,21 @@ class AllReviewGenerator
       if @skip_time_restriction || (time_in_user_tz.hour == SEND_HOUR && time_in_user_tz.wday == 5)
         # In the future we may ask the user to specify which expectation to use
         most_recent_expectation = Expectation.where(user_id: user.id).order(created_at: :desc).first
+        accomplishments = Accomplishment.where(user_id: @user.id, created_at: @start_time..@end_time)
+
+        if accomplishments.empty?
+          puts "No accomplishments for user=#{@user.id} in range #{@start_time}-#{@end_time}"
+          next
+        end
+
         review_generator = ReviewGenerator.new(
           user_id: user.id,
           start_time: @start_time,
           end_time: @end_time,
           expectation_id: most_recent_expectation.id,
           review_type: @review_type,
-          initial_prompt: @initial_prompt
+          initial_prompt: @initial_prompt,
+          accomplishments: accomplishments
         )
 
         review = review_generator.call

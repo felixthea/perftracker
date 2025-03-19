@@ -23,6 +23,7 @@ class ProcessAccomplishmentsEmail
       text: body, # Save email body as the accomplishment text
     )
     Rails.logger.info "Accomplishment saved for #{user.email}, accomplishment: #{accomplishment.id}"
+    accomplishment
   end
 
   private
