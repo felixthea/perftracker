@@ -25,8 +25,8 @@ class MailgunController < ApplicationController
 
     review_generator = ReviewGenerator.new(
       user_id: user.id,
-      start_time: Time.stamp,
-      end_time: Time.stamp,
+      start_time: DateTime.now,
+      end_time: DateTime.now,
       expectation_id: most_recent_expectation.id,
       review_type: "immediate_feedback",
       initial_prompt: prompt_str,
