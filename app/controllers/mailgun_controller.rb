@@ -14,14 +14,6 @@ class MailgunController < ApplicationController
       way where you are talking directly to me to give me mostly positive feedback. Start directly with the feedback, without
       any introductory phrases or acknowledgements of this request."
     prompt_str = immediate_feedback_prompt.dup
-    accomplishments_str = "Here are my accomplishments for today:\n"
-    accomplishments_str << accomplishment.text
-
-    most_recent_expectation = Expectation.where(user_id: user.id).order(created_at: :desc).first
-    expectation_str = "\nAnd here is the job expectation:\n#{most_recent_expectation.text}"
-
-    prompt_str << accomplishments_str
-    prompt_str << expectation_str
 
     review_generator = ReviewGenerator.new(
       user_id: user.id,
@@ -30,7 +22,7 @@ class MailgunController < ApplicationController
       expectation_id: most_recent_expectation.id,
       review_type: "immediate_feedback",
       initial_prompt: prompt_str,
-      accomplishments: accomplishments
+      accomplishments: [ accomplishments ]
     )
 
     review = review_generator.call
