@@ -12,7 +12,7 @@ class MailgunController < ApplicationController
     immediate_feedback_prompt = "Hi, I would like you to create a recap of my day with these accomplishment(s)
       and how they helped me meet or exceed my expectations. Write this in a
       way where you are talking directly to me to give me mostly positive feedback. Start directly with the feedback, without
-      any introductory phrases or acknowledgements of this request."
+      any introductory phrases or acknowledgements of this request.  Also limit the response to 3-4 sentences only."
     prompt_str = immediate_feedback_prompt.dup
 
     most_recent_expectation = Expectation.where(user_id: user.id).order(created_at: :desc).first
