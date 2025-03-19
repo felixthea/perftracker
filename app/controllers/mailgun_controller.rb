@@ -15,6 +15,8 @@ class MailgunController < ApplicationController
       any introductory phrases or acknowledgements of this request."
     prompt_str = immediate_feedback_prompt.dup
 
+    most_recent_expectation = Expectation.where(user_id: user.id).order(created_at: :desc).first
+
     review_generator = ReviewGenerator.new(
       user_id: user.id,
       start_time: DateTime.now,
