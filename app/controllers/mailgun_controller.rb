@@ -8,7 +8,7 @@ class MailgunController < ApplicationController
 
     Rails.logger.info "Accomplishment saved! accomplishment: #{accomplishment.id}"
 
-    user = User.find_by(email: email_params[:sender])
+    user = User.find_by(email: params[:sender])
     immediate_feedback_prompt = "Hi, I would like you to create a recap of my day with these accomplishment(s)
       and how they helped me meet or exceed my expectations. Write this in a
       way where you are talking directly to me to give me mostly positive feedback. Start directly with the feedback, without
