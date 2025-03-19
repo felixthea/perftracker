@@ -24,7 +24,7 @@ class MailgunController < ApplicationController
       expectation_id: most_recent_expectation.id,
       review_type: "immediate_feedback",
       initial_prompt: prompt_str,
-      accomplishments: [ accomplishments ]
+      accomplishments: [ accomplishment ]
     )
 
     review = review_generator.call
